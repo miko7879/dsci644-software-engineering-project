@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>DSCI 644 Team E Final Project</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/scrolling-nav.css" rel="stylesheet">
+	
+	<style>
+      .img-container {
+        text-align: center;
+        display: block;
+      }
+    </style>
+
+</head>
+
+<body id="page-top">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand js-scroll-trigger" href="#page-top">DSCI 644 Team E Final Project</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#Introduction">Introduction and Purpose</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#Requirements">Requirements</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#Goals">Project Goals</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#Architecture">Architecture</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#Model">Model</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#Documentation">Documentation</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="bg-primary text-white">
+        <div class="container text-center">
+            <h1> DSCI 644 Team E Final Project </h1>
+            <h4>Understanding Amazon Application Reviews</h4>
+            <p class=lead> A sentiment analysis model using N-Grams and Boosted Trees </p>
+        </div>
+    </header>
+
+    <section id="Introduction">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h2>Introduction and Purpose</h2>
+                    <p class="lead">
+						Today's era is about reviews, customer satisfaction and ensuring high product quality. Every
+						business wants to be a leader in it’s own field and strives to expand into others. Customer
+						feedback is a popular and effective way to measure business performance. Amazon, which is
+						one of the largest companies in the world, uses a simple review approach for their applications.
+						Ratings on a pre - defined scale with associated text reviews provided by the users help gauge
+						how well each application is received. There are many ways of analyzing these reviews, and the
+						currently implemented multiclass classification model is only able to attain an accuracy of about
+						60%. Furthermore, it does so by predicting the most common class, which is a very rudimentary
+						machine.
+						<br></br>
+                        The purpose of this project is to revisit the currently implemented approach and develop it into a
+						high - quality model. In order to accomplish this, we will redefine the problem as a binary
+						classification problem, classifying reviews as good or bad. This is a coarser scale which should
+						allow much higher accuracies while still allowing the client to draw conclusions about text
+						reviews. We will develop a sentiment analysis model that will determine the probability of a given text
+						review being positive. The model will be built in Azure ML, and will need to attain an accuracy of
+						at least 90% on test data.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="Requirements" class="bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h2>Requirements</h2>
+                    <p class="lead">
+						The requirements are presented in the embedded pdf below. They have been updated from the original project proposal document to include requirements about the software hosting system, which were not considered in the original proposal.
+						<br></br>
+                        <embed src="content/embedded/Requirements.pdf" type="application/pdf" width="100%"
+                            height="600px" />
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="Goals">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h2>Project Goals</h2>
+                    <p class="lead">The goals of this project are threefold:</p>
+						<ol class = "lead">
+						<li>Evolve the model to meet all user requirements</li>
+						<li>Design a software hosting system to provide a coherent interface to the model</li>
+						<li>Develop an implementation, test, and lifecycle plan for the system</li>
+						</ol>
+					<p class="lead">The goals are reflected in the requirements outlined above.</p>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="Architecture" class="bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h2>Architecture</h2>
+                    <p class="lead">
+						The detailed design an architecture are presented in the design document, which can be downloaded from the documents section below. In this section we will rpesent an abridged summary of that document. The system is designed in a classic client - server architecture with a frontend server to serve the web portal to the user and a backend server to host and manage access to the model. There is also integration with the company's active directory to ensure users are authenticated.
+						<br></br>
+                        <span class="img-container"><img src="content/images/Deployment Architecture.png"></span>
+						<br></br>
+						The software will be distributed across the frontend and the backend. The frontend will take care of user authentication, data representation, and sending queries to the backend. It will provide avenues for user input and will represent the results in an appropriate manner, as defined in FR8 and FR9. The backend will be responsible for receiving queries, generating predictions, and replying with the results. It is essentially a wrapper for the model, allowing it to be interfaced with HTTP requests. The backend will be designed with extensibility in mind.
+						<br></br>
+                        <span class="img-container"><img src="content/images/High Level Software Diagram.png"></span>
+						<br></br>
+						Communication between the frontend and backend will occur using HTTP commands (via the API), namely the POST and GET commands. The frontend will send the input data as part of a POST request to the backend, which will in turn generate predictions and store them, sending a reply with the HTTP 201 status code, who’s message body includes the location of the newly created predictions. The frontend will then be able to retrieve these predictions using a GET request.
+						<br></br>
+						The frontend software will consist of a web page with a javascript component to send and receive data and to appropriately represent the model’s predictions, either by displaying it in the webpage (in case of a single query) or by generating a CSV file with ones and zeroes representing positive and negative predictions. The backend software consists of the models and the wrapper to present these models as an HTTP server, and will be written in Java. The models themselves are trained and the final parameters are stored in json files on the backend server, which can be read from the disk on instantiation.
+						<br></br>
+						We chose to consider this problem as a classic sentiment analysis problem, where the goal is to predict whether each review is positive or negative. The original dataset was transformed as follows: each rating was converted to either 0 or 1 by rounding ratings that are greater than 0.5 to 1 and less than or equal to 0.5 to 0. To decide on the best model, we are considering three key areas: text pre - processing, text representation, and the type of model used. We are also considering novel approaches which do not require pre-processing, namely VADER.
+						<br></br>
+                        <span class="img-container"><img src="content/images/ML Training and Evaluation Architecture.png"></span>
+						<br></br>
+						The flow chart above shows the machine learning pipeline we developed to determine the best model. It starts with the text reviews, which then go through pre - processing steps and are represented either as N - Grams or through Latent Dirichlet Analysis. We then use a stratified train/test split to generate the training and test sets, and again use a stratified train/test split on just the training set to generate a tuning and validation set, which are used to tune model hyperparameters. Once the optimal hyperparameters are chosen, the model is trained on the entirety of the training set and validated against the test set to come up with a final accuracy score. If an approach does not require a given step, it is simply skipped.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="Model">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h2>Azule ML Studio Model</h2>
+                    <p class="lead">
+                        <a href="https://gallery.azure.ai/Experiment/DSCI-644-Team-E-Final-Model">Azure ML Studio Link</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="Documentation" class="bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h2>Documentation</h2>
+					<ol class = "lead">
+						<li><a href="content/documentation/DSCI 644 Project Proposal.pdf" download>Project Proposal</a></li>
+						<li><a href="content/documentation/DSCI 644 Design Document.pdf" download>Architecture and Design</a></li>
+						<li><a href="content/documentation/DSCI 644 Final Report.pdf" download>Final Report</a></li>
+					</ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+        <div class="container">
+            <p class="m-0 text-center text-white">
+				Akanksha Arora  &bull;
+				Michael Kitching  &bull;
+				Michael Kogan  &bull;
+				Mohammadreza Shoeji &bull;
+				Muhammad Fazalul Rahman
+				<br></br>
+                <img src="content/images/rit_logo.png" height="20%" width="20%">
+            </p>
+        </div>
+        <!-- /.container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom JavaScript for this theme -->
+    <script src="js/scrolling-nav.js"></script>
+
+</body>
+
+</html>
